@@ -205,7 +205,9 @@ fileprivate extension Shine {
 			assertionFailure("Shine: CFBundleVersion must be set")
 			return
 		}
-		let displayVersion = infoDictionary["CFBundleShortVersionString"] as? String
+		var displayVersion = infoDictionary["CFBundleShortVersionString"] as! String
+		let buildVersion = infoDictionary["CFBundleVersion"]  as? String ?? ""
+		displayVersion = buildVersion != "" ? displayVersion + "." + buildVersion : displayVersion
 		let bundleDisplayname = self.config.customDisplayName ?? infoDictionary["CFBundleDisplayName"] as? String
 		
 		var releaseNotes = ""
